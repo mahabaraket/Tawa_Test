@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:test_tawa/design_system/molecules/nav_bar/customnavbar.dart';
-import 'package:test_tawa/feature/home/domain/apiservice.dart';
+import 'package:test_tawa/core/http/apiservice.dart';
 
 class HomeScreen extends StatefulWidget {
   static String routeName = "/home";

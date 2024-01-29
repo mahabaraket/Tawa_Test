@@ -36,6 +36,18 @@ class LoginScreen extends StatelessWidget {
               ),
               child: Column(
                 children: [
+                  const SizedBox(height: 10),
+                  SizedBox(
+                    width: 154,
+                    height: 9,
+                    child: Container(
+                        decoration: ShapeDecoration(
+                      color: Color(0xFFD9D9D9),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    )),
+                  ),
                   const SizedBox(height: 60),
                   SizedBox(
                     height: 100, // Adjust the height as needed

@@ -4,7 +4,7 @@ import 'package:test_tawa/design_system/atoms/colors/constants.dart';
 import 'package:test_tawa/design_system/molecules/FormError/form_error.dart';
 import 'package:test_tawa/design_system/molecules/custum_surfic_icon/custum_surfix_icon.dart';
 import 'package:test_tawa/design_system/organismes/keyboard.dart';
-import 'package:test_tawa/feature/home/domain/apiservice.dart';
+import 'package:test_tawa/core/http/apiservice.dart';
 
 import 'package:test_tawa/feature/home/presentation/view/home_view.dart';
 import 'package:test_tawa/feature/login/signin_screen.dart';
@@ -80,7 +80,8 @@ class _SignFormState extends State<SignForm> {
             decoration: const InputDecoration(
               // labelText: "Email",
               hintText: "Email",
-              enabledBorder: OutlineInputBorder(
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
                 borderSide: BorderSide(width: 1, color: Color(0xFF979797)),
               ),
 
@@ -88,7 +89,7 @@ class _SignFormState extends State<SignForm> {
               suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/mail.svg"),
             ),
           ),
-          const SizedBox(height: 15),
+          const SizedBox(height: 5),
 
           TextFormField(
             key: const ValueKey('password'),
@@ -111,14 +112,16 @@ class _SignFormState extends State<SignForm> {
             decoration: const InputDecoration(
               // labelText: "Password",
               hintText: "Password",
-              enabledBorder: OutlineInputBorder(
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
                 borderSide: BorderSide(width: 1, color: Color(0xFF979797)),
               ),
+
               floatingLabelBehavior: FloatingLabelBehavior.always,
               suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/eye.svg"),
             ),
           ),
-          const SizedBox(height: 2),
+          const SizedBox(height: 1),
 
           FormError(errors: errors),
           const SizedBox(height: 58),
@@ -142,10 +145,9 @@ class _SignFormState extends State<SignForm> {
                     if (response) {
                       print("res$response");
                       var token = ApiService.getStoredToken();
-                      Navigator.pushNamedAndRemoveUntil(
-                          context, HomeScreen.routeName, (route) => false);
+                      Navigator.pushNamed(context, HomeScreen.routeName);
                     } else {
-                      Get.offAll(SignInScreen());
+                      //Get.offAll(SignInScreen());
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text('Invalid email or password'),
@@ -156,11 +158,8 @@ class _SignFormState extends State<SignForm> {
                   });
 
                   // Do something with the values
-                  print('Email: $email');
-                  print(
-                      'Password: $password'); // if all are valid then go to success screen
+
                   KeyboardUtil.hideKeyboard(context);
-                  Navigator.pushNamed(context, HomeScreen.routeName);
                 }
               },
               child: const Text("Sign In",
@@ -172,7 +171,7 @@ class _SignFormState extends State<SignForm> {
                     //height: 0.06,
                   ))),
           //const Spacer(),
-          const SizedBox(height: 23),
+          const SizedBox(height: 20),
 
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
