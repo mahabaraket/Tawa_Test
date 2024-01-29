@@ -124,7 +124,7 @@ class _SignFormState extends State<SignForm> {
           const SizedBox(height: 1),
 
           FormError(errors: errors),
-          const SizedBox(height: 58),
+          const SizedBox(height: 55),
           ElevatedButton(
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.white, primary: Color(0xFF6B5CD2),
@@ -145,7 +145,8 @@ class _SignFormState extends State<SignForm> {
                     if (response) {
                       print("res$response");
                       var token = ApiService.getStoredToken();
-                      Navigator.pushNamed(context, HomeScreen.routeName);
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, HomeScreen.routeName, (route) => false);
                     } else {
                       //Get.offAll(SignInScreen());
                       ScaffoldMessenger.of(context).showSnackBar(
