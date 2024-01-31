@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test_tawa/design_system/atoms/spacings/size_config.dart';
 
-import '../../design_system/atoms/colors/constants.dart';
+import '../../core/constants/constants.dart';
 
 class OnboardScreen extends StatefulWidget {
   final String? image;

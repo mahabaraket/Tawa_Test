@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test_tawa/design_system/atoms/colors/colors.dart';
-import 'package:test_tawa/design_system/atoms/colors/constants.dart';
+import 'package:test_tawa/core/constants/constants.dart';
 import 'package:test_tawa/feature/login/login_screen.dart';
 import 'package:test_tawa/feature/onbording/onboarding.dart';
 import 'package:flutter_svg/flutter_svg.dart';

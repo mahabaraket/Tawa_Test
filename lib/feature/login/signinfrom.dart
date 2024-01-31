@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:test_tawa/design_system/atoms/colors/constants.dart';
+import 'package:test_tawa/core/constants/constants.dart';
 import 'package:test_tawa/design_system/molecules/FormError/form_error.dart';
 import 'package:test_tawa/design_system/molecules/custum_surfic_icon/custum_surfix_icon.dart';
 import 'package:test_tawa/design_system/organismes/keyboard.dart';
@@ -24,7 +24,7 @@ class _SignFormState extends State<SignForm> {
   final _formKey = GlobalKey<FormState>();
   String? email;
   String? password;
-  //bool? remember = false;
+  bool obscurePassword = true;
   final List<String?> errors = [];
 
   void addError({String? error}) {
@@ -54,77 +54,105 @@ class _SignFormState extends State<SignForm> {
       key: _formKey,
       child: Column(
         children: [
-          TextFormField(
-            key: const ValueKey('email'),
-            controller: emailController,
-            keyboardType: TextInputType.emailAddress,
-            onSaved: (newValue) => email = newValue,
-            onChanged: (value) {
-              if (value.isNotEmpty) {
-                removeError(error: kInvalidEmailError);
-              } else if (emailValidatorRegExp.hasMatch(value)) {
-                removeError(error: kInvalidEmailError);
-              }
-              return;
-            },
-            validator: (value) {
-              if (value!.isEmpty) {
-                addError(error: knullEmailError);
-                return "";
-              } else if (!emailValidatorRegExp.hasMatch(value)) {
-                addError(error: kInvalidEmailError);
-                return "";
-              }
-              return null;
-            },
-            decoration: const InputDecoration(
-              // labelText: "Email",
-              hintText: "Email",
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-                borderSide: BorderSide(width: 1, color: Color(0xFF979797)),
-              ),
+          Column(
+            children: [
+              TextFormField(
+                key: const ValueKey('email'),
+                controller: emailController,
+                keyboardType: TextInputType.emailAddress,
+                onSaved: (newValue) => email = newValue,
+                onChanged: (value) {
+                  if (value.isNotEmpty) {
+                    removeError(error: kInvalidEmailError);
+                  } else if (emailValidatorRegExp.hasMatch(value)) {
+                    removeError(error: kInvalidEmailError);
+                  }
+                  return;
+                },
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    addError(error: knullEmailError);
+                    return "";
+                  } else if (!emailValidatorRegExp.hasMatch(value)) {
+                    addError(error: kInvalidEmailError);
+                    return "";
+                  }
+                  return null;
+                },
+                decoration: const InputDecoration(
+                  // labelText: "Email",
+                  hintText: "Email",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    borderSide: BorderSide(width: 1, color: Color(0xFF979797)),
+                  ),
 
-              floatingLabelBehavior: FloatingLabelBehavior.always,
-              suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/mail.svg"),
-            ),
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  suffixIcon: CustomSurffixIcon(
+                    svgIcon: "assets/icons/mail.svg",
+                    /*   onPressed: () {
+                        print("emain");
+                      } */
+                  ),
+                ),
+              ),
+              FormError(
+                  errors: errors
+                      .where((error) => error == knullEmailError)
+                      .toList()),
+            ],
           ),
+
           const SizedBox(height: 5),
 
-          TextFormField(
-            key: const ValueKey('password'),
-            controller: passwordController,
-            obscureText: true,
-            onSaved: (newValue) => password = newValue,
-            onChanged: (value) {
-              if (value.isNotEmpty) {
-                removeError(error: kPassNullError);
-              }
-              return;
-            },
-            validator: (value) {
-              if (value!.isEmpty) {
-                addError(error: kPassNullError);
-                return "";
-              }
-              return null;
-            },
-            decoration: const InputDecoration(
-              // labelText: "Password",
-              hintText: "Password",
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-                borderSide: BorderSide(width: 1, color: Color(0xFF979797)),
-              ),
+          Column(
+            children: [
+              TextFormField(
+                key: const ValueKey('password'),
+                controller: passwordController,
+                obscureText: obscurePassword,
+                onSaved: (newValue) => password = newValue,
+                onChanged: (value) {
+                  if (value.isNotEmpty) {
+                    removeError(error: kPassNullError);
+                  }
+                  return;
+                },
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    addError(error: kPassNullError);
+                    return "";
+                  }
+                  return null;
+                },
+                decoration: const InputDecoration(
+                  // labelText: "Password",
+                  hintText: "Password",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    borderSide: BorderSide(width: 1, color: Color(0xFF979797)),
+                  ),
 
-              floatingLabelBehavior: FloatingLabelBehavior.always,
-              suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/eye.svg"),
-            ),
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  suffixIcon: CustomSurffixIcon(
+                    svgIcon: "assets/icons/eye.svg",
+                    /*  onPressed: () {
+                      setState(() {
+                        obscurePassword=!obscurePassword;
+                    })}; */
+                  ),
+                ),
+              ),
+              FormError(
+                  errors: errors
+                      .where((error) => error == kPassNullError)
+                      .toList()),
+            ],
           ),
+
           const SizedBox(height: 1),
 
-          FormError(errors: errors),
-          const SizedBox(height: 55),
+          const SizedBox(height: 50),
           ElevatedButton(
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.white, primary: Color(0xFF6B5CD2),

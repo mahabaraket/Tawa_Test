@@ -48,7 +48,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                     )),
                   ),
-                  const SizedBox(height: 60),
+                  const SizedBox(height: 50),
                   SizedBox(
                     height: 100, // Adjust the height as needed
                     // width: 120, // Adjust the width as needed
@@ -67,7 +67,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(
-                    height: 119,
+                    height: 100,
                   ),
                   ElevatedButton(
                     onPressed: () {
